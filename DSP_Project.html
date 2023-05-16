@@ -1,0 +1,688 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>DSP_Project</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-12-25"><meta name="DC.source" content="DSP_Project.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1></h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">&#1610;&#1608;&#1587;&#1601; &#1575;&#1576;&#1585;&#1575;&#1607;&#1610;&#1605; &#1593;&#1576;&#1583; &#1575;&#1604;&#1593;&#1586;&#1610;&#1586; &#1575;&#1604;&#1587;&#1610;&#1583; &#1606;&#1583;&#1575;</a></li><li><a href="#2">PROJECT SIGNAL 2022</a></li><li><a href="#3">Full design of both FIR AND IIR FILTERS</a></li><li><a href="#4">2-Hamming window</a></li><li><a href="#6">3- BlackMan Window</a></li><li><a href="#8">Design of a lowpass IIR filter using butterworth representation</a></li><li><a href="#10">The following is to plot the DFT of the frequnecies before and after to track the effiency of the filter</a></li><li><a href="#11">THANKS</a></li></ul></div><h2 id="1">&#1610;&#1608;&#1587;&#1601; &#1575;&#1576;&#1585;&#1575;&#1607;&#1610;&#1605; &#1593;&#1576;&#1583; &#1575;&#1604;&#1593;&#1586;&#1610;&#1586; &#1575;&#1604;&#1587;&#1610;&#1583; &#1606;&#1583;&#1575;</h2><h2 id="2">PROJECT SIGNAL 2022</h2><pre class="codeinput"><span class="comment">% Concerning the audio samples try using the audiocheck.net_pinknoise.wav</span>
+<span class="comment">% Concerning the audio samples try using the FIR_GIRL_SAMPLE.wav</span>
+<span class="comment">% Concerning the audio samples try using the IIR_SAMPLE_GIRL.wav</span>
+</pre><h2 id="3">Full design of both FIR AND IIR FILTERS</h2><pre class="codeinput">clc;clear <span class="string">all</span>;close <span class="string">all</span>;
+<span class="comment">% A set of prompts for the user</span>
+disp(<span class="string">'Read Carefully'</span>);
+disp(<span class="string">'This program will take the input samples and filter it with your specifications'</span>);
+disp(<span class="string">'We could show the signal plot but if we took a window with same number of samples as the signal it'</span>);
+disp(<span class="string">'would require alot of storage for the array'</span>);
+disp(<span class="string">'So we refrained from showing that but we stuck with the frequency plots which are more discriptive'</span>);
+
+disp(<span class="string">'================================================================'</span>);
+<span class="comment">% Choose LowPass or HighPass</span>
+Answer=input(<span class="string">'Which type of filter do you want to use\n1-FIR LOWPASS FILTER\n2-IIR LOWPASS FILTER: '</span>);
+
+<span class="comment">% LowPass</span>
+<span class="keyword">if</span>(Answer==1)
+[Y,FS]=audioread(<span class="string">'audiocheck.net_pinknoise.wav'</span>); <span class="comment">%Read music input</span>
+<span class="comment">% FS is the sampling rate for the audio by 'audioread'</span>
+<span class="comment">% Fs is the best sampling rate if you want to hear the sound accuratley</span>
+
+
+fc=input(<span class="string">'Enter the cut off frequency: '</span>);
+f_stopband=input(<span class="string">'Enter the stopband edge frequency: '</span>);
+f_passband=input(<span class="string">'Enter the passband edge frequency: '</span>);
+disp(<span class="string">'You should know that "to hear well" use sampling rate of 44100 hz'</span>);
+fs=input(<span class="string">'Enter the sampling rate: '</span>);
+window=input(<span class="string">'Enter which window you want 1- recatngular 2- hamming 3- blackman  (type in the number): '</span>);
+ts=1/fs;
+delta_f = (abs(f_stopband-f_passband))/fs;    <span class="comment">%transition band width</span>
+<span class="keyword">if</span>(window==1)
+
+
+x=1; <span class="comment">% to identify the window for later use</span>
+N_intial=0.9/delta_f; <span class="comment">% for rectangular window</span>
+N=round(N_intial);
+<span class="comment">% to get N the right way by rounding it to the higher value if it was a</span>
+<span class="comment">% fraction</span>
+    <span class="keyword">if</span> N&gt;N_intial
+    <span class="keyword">if</span> rem(N,2)==0
+        N=N+1;
+    <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> N&lt;N_intial
+    <span class="keyword">if</span> rem(N,2)==0
+        N=N+1;
+    <span class="keyword">else</span>
+        N=N+2;
+    <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> N==N_intial
+    <span class="keyword">if</span> rem(N,2)==0
+        N=N+1;
+    <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+omega_c=2*pi*fc*ts; <span class="comment">% normalized cutoff frequency</span>
+M=(N-1)/2;
+n=-M:1:-1;
+h=(sin(omega_c*n)./(n*pi));
+h_0=omega_c/pi;
+h=[h h_0]; <span class="comment">% concatenation</span>
+h(M+2:N)=h(M:-1:1);
+
+w=rectwin(N).';
+
+b=h.*w;
+[H,W]=freqz(b,1,1024); <span class="comment">% W set of noramlized frequencies , H is the complex values</span>
+figure
+plot((W*fs)/(2*pi),abs(H));
+title(<span class="string">'RECTANGULAR'</span>);
+Y_filtered=filter(b,1,Y); <span class="comment">% audio output signal</span>
+sound(Y_filtered,fs);     <span class="comment">% audio output</span>
+<span class="keyword">end</span>
+<span class="keyword">if</span>(window==2)
+</pre><h2 id="4">2-Hamming window</h2><pre class="codeinput">x=2;
+N_intial=3.3/delta_f; <span class="comment">% for hamming window</span>
+N=round(N_intial);
+<span class="comment">% to get N the right way  by rounding it</span>
+    <span class="keyword">if</span> N&gt;N_intial
+    <span class="keyword">if</span> rem(N,2)==0
+        N=N+1;
+    <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> N&lt;N_intial
+    <span class="keyword">if</span> rem(N,2)==0
+        N=N+1;
+    <span class="keyword">else</span>
+        N=N+2;
+    <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> N==N_intial
+    <span class="keyword">if</span> rem(N,2)==0
+        N=N+1;
+    <span class="keyword">end</span>
+    <span class="keyword">end</span>
+omega_c=2*pi*fc*ts; <span class="comment">%normalized cutoff frequency</span>
+M=(N-1)/2;
+n=-M:1:-1;
+h=(sin(omega_c*n)./(n*pi));
+h_0=omega_c/pi;
+h=[h h_0];
+h(M+2:N)=h(M:-1:1);
+
+w=hamming(N).';
+
+b=h.*w;
+[H,W]=freqz(b,1,1024);
+figure
+plot((W*fs)/(2*pi),abs(H));
+title(<span class="string">'HAMMING'</span>);
+Y_filtered=filter(b,1,Y); <span class="comment">%output audio signal</span>
+sound(Y_filtered,fs);     <span class="comment">%output audio</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+<span class="keyword">if</span>(window==3)
+</pre><h2 id="6">3- BlackMan Window</h2><pre class="codeinput">x=3;
+N_intial=5.5/delta_f; <span class="comment">% for blackman window</span>
+N=round(N_intial);
+<span class="comment">% to get N the right way</span>
+    <span class="keyword">if</span> N&gt;N_intial
+    <span class="keyword">if</span> rem(N,2)==0
+        N=N+1;
+    <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> N&lt;N_intial
+    <span class="keyword">if</span> rem(N,2)==0
+        N=N+1;
+    <span class="keyword">else</span>
+        N=N+2;
+    <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> N==N_intial
+    <span class="keyword">if</span> rem(N,2)==0
+        N=N+1;
+    <span class="keyword">end</span>
+    <span class="keyword">end</span>
+omega_c=2*pi*fc*ts;
+M=(N-1)/2;
+n=-M:1:-1;
+h=(sin(omega_c*n)./(n*pi));
+h_0=omega_c/pi;
+h=[h h_0];
+h(M+2:N)=h(M:-1:1);
+
+w=blackman(N).';
+
+
+b=h.*w;
+[H,W]=freqz(b,1,1024);
+figure
+plot((W*fs)/(2*pi),abs(H));
+title(<span class="string">'BLACKMAN'</span>);
+Y_filtered=filter(b,1,Y); <span class="comment">%audio signal</span>
+sound(Y_filtered,fs);      <span class="comment">% audio output</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+    <span class="keyword">if</span>(window ~= 1&amp;&amp; window ~=2 &amp;&amp; window ~=3)
+    x=input(<span class="string">'PLs type in a number from 1 to 3 ---&gt; RUN the Prograrm Again '</span>);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="keyword">if</span>(Answer==2)
+</pre><h2 id="8">Design of a lowpass IIR filter using butterworth representation</h2><pre class="codeinput">[Y,FS]=audioread(<span class="string">'audiocheck.net_pinknoise.wav'</span>); <span class="comment">%Read music input</span>
+
+<span class="comment">% FS is the same as above 44100 hz is the best sampling rate</span>
+
+fc=input(<span class="string">'Enter the cutoff frequency: '</span>);
+disp(<span class="string">'You should know that "to hear well" use sampling rate of 44100 hz'</span>);
+fs=input(<span class="string">'Enter the sampling rate: '</span>);
+<span class="keyword">if</span>(fs==fc*2) <span class="comment">% if the user entered a sampling rate double the fc --&gt; butter function wouldnot give an error</span>
+    fs=fs+1;
+<span class="keyword">end</span>
+<span class="comment">% if the user choses to pick one of the windows we have already determined</span>
+<span class="comment">% their attenuation specs</span>
+n=10; <span class="comment">% default value for n if the user didnot choose on of the following choices</span>
+choice=5;
+choice1=input(<span class="string">'CHOOSE\n1-Enter the order of the filter\n2-Enter the specs of the filter : '</span>);
+<span class="keyword">if</span>(choice1==2)
+choice=input(<span class="string">'1-Rectangular window\n2-Hamming window\n3-Blackman\n4-Enter my specs\n'</span>);
+<span class="comment">% Amax is the maximum allowable attenaution in the passband</span>
+<span class="comment">% Amin is the minimum allowable attenaution in the passband</span>
+<span class="keyword">if</span>(choice==1)
+    Amax=0.7;
+    Amin=21;
+<span class="keyword">end</span>
+<span class="keyword">if</span>(choice==2)
+    Amax=0.0194;
+    Amin=53;
+<span class="keyword">end</span>
+<span class="keyword">if</span>(choice==3)
+    disp(<span class="string">'Since you chose blackman you MUST increase the range of the transition region... at least 2000 hz '</span>);
+    Amax=0.0017; <span class="comment">%0.0017</span>
+    Amin=74;
+<span class="keyword">end</span>
+<span class="keyword">if</span>(choice==4)
+    Amax=input(<span class="string">'Enter the (Max. allowable attenuation in passband: '</span>);
+    Amin=input(<span class="string">'Enter the (MIN. allowable attenuation in Stopband: '</span>);
+<span class="keyword">end</span>
+disp(<span class="string">'When entering the passband and stopband edge frequencies'</span>)
+disp(<span class="string">'-MAKE SURE TO SET A REASONABLE VALUE'</span>);
+disp(<span class="string">'-Narrowing the transition band would increase the order'</span>);
+ws=input(<span class="string">'Enter the stopband edge frequency: '</span>);
+wp=input(<span class="string">'Enter the Passband edge frequency: '</span>);
+n_intial=(0.5*log(((10.^(0.1*Amin))-1)/((10.^(0.1*Amax))-1)))/log(ws/wp); <span class="comment">% this function is the butterworth normalization method to get the order of the filter</span>
+<span class="comment">% to round n to the larger the value</span>
+n=round(n_intial);
+<span class="comment">% to get N the right way</span>
+    <span class="keyword">if</span> n&gt;n_intial
+    <span class="keyword">if</span> rem(n,2)==0
+        n=n+1;
+    <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> n&lt;n_intial
+    <span class="keyword">if</span> rem(n,2)==0
+        n=n+1;
+    <span class="keyword">else</span>
+        n=n+2;
+    <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> n==n_intial
+    <span class="keyword">if</span> rem(n,2)==0
+        n=n+1;
+    <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+<span class="keyword">end</span>
+<span class="keyword">if</span>(choice1==1)
+    n=input(<span class="string">'Order : '</span>);
+<span class="keyword">end</span>
+
+<span class="comment">% we will choose fs/2 in the following function to satisify the nyquist</span>
+<span class="comment">% rate (that's what I have found on mathsworks site)</span>
+
+[b,a]=butter(n,fc/(fs/2));  <span class="comment">% maximally flat</span>
+Y_filtered=filter(b,a,Y);   <span class="comment">% audio signal</span>
+sound(Y_filtered,fs);       <span class="comment">% audio output</span>
+[H,W]=freqz(b,a,1024);
+figure
+plot((W*fs)/(2*pi),abs(H));
+<span class="keyword">if</span>(choice==1)
+    <span class="comment">%wind=rectwin(signal_length).';</span>
+    title(<span class="string">'Rectangular'</span>);
+<span class="keyword">end</span>
+<span class="keyword">if</span>(choice==2)
+    <span class="comment">%wind=hamming(signal_length).';</span>
+    title(<span class="string">'Hamming'</span>);
+<span class="keyword">end</span>
+<span class="keyword">if</span>(choice==3)
+    <span class="comment">%wind=blackman(signal_length).';</span>
+    title(<span class="string">'Blackman'</span>);
+<span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+
+<span class="comment">% signal_window=signal.*wind;</span>
+<span class="comment">% figure</span>
+<span class="comment">% subplot(211);plot(signal);</span>
+<span class="comment">% title('INPUT SIGNAL');</span>
+<span class="comment">% subplot(212);plot(signal_window);</span>
+<span class="comment">% title('INPUT SIGNAL WITH WINDOW');</span>
+figure
+subplot(211);
+plot(Y);
+title(<span class="string">'INPUT SIGNAL'</span>);
+subplot(212);
+plot(Y_filtered);
+title(<span class="string">'output SIGNAL'</span>);
+</pre><pre class="codeoutput">Read Carefully
+This program will take the input samples and filter it with your specifications
+We could show the signal plot but if we took a window with same number of samples as the signal it
+would require alot of storage for the array
+So we refrained from showing that but we stuck with the frequency plots which are more discriptive
+================================================================
+</pre><pre class="codeoutput error">Error using input
+Cannot call INPUT from EVALC.
+
+Error in DSP_Project (line 21)
+Answer=input('Which type of filter do you want to use\n1-FIR LOWPASS FILTER\n2-IIR LOWPASS FILTER: ');
+</pre><h2 id="10">The following is to plot the DFT of the frequnecies before and after to track the effiency of the filter</h2><pre class="codeinput">N_2=length(Y);
+N_2_f=length(Y_filtered);
+f_axis=-fs/2:fs/N_2:fs/2-(fs/N_2);
+figure
+Y_fft =fftshift(fft(Y));
+Y_fft=transpose(Y_fft); <span class="comment">% plot function can take either a row or colomn matrix we chose the row matrix form to be the same as f_axis</span>
+subplot(211);stem(f_axis,(1/N_2)*abs((Y_fft))) <span class="comment">% plotting amplitude</span>
+title(<span class="string">'Before Filtering'</span>);
+Y_fft_filtered =fftshift(fft(Y_filtered));
+Y_fft_filtered=transpose(Y_fft_filtered); <span class="comment">% plot function can take either a row or colomn matrix we chose the row matrix form to be the same as f_axis</span>
+subplot(212);stem(f_axis,(1/N_2_f)*abs(Y_fft_filtered)); <span class="comment">% plotting amplitude</span>
+title(<span class="string">'After Filtering'</span>);
+figure
+stem(f_axis,abs((Y_fft)));
+hold
+stem(f_axis,abs(Y_fft_filtered));
+<span class="keyword">if</span>(Answer==1)
+    title(<span class="string">'FIR'</span>);
+<span class="keyword">end</span>
+<span class="keyword">if</span>(Answer==2)
+    title(<span class="string">'IIR'</span>);
+<span class="keyword">end</span>
+
+
+<span class="comment">% the filter is plotted in it's magnitude form not the decibel form</span>
+<span class="comment">% if we want decibel we would just use  20log(abs(H)) instead of abs(H)</span>
+</pre><h2 id="11">THANKS</h2><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+
+%% يوسف ابراهيم عبد العزيز السيد ندا                   
+%%                         PROJECT SIGNAL 2022
+
+% Concerning the audio samples try using the audiocheck.net_pinknoise.wav
+% Concerning the audio samples try using the FIR_GIRL_SAMPLE.wav
+% Concerning the audio samples try using the IIR_SAMPLE_GIRL.wav
+
+
+%% Full design of both FIR AND IIR FILTERS 
+clc;clear all;close all;
+% A set of prompts for the user
+disp('Read Carefully');
+disp('This program will take the input samples and filter it with your specifications');
+disp('We could show the signal plot but if we took a window with same number of samples as the signal it');
+disp('would require alot of storage for the array');
+disp('So we refrained from showing that but we stuck with the frequency plots which are more discriptive');
+
+disp('================================================================');
+% Choose LowPass or HighPass
+Answer=input('Which type of filter do you want to use\n1-FIR LOWPASS FILTER\n2-IIR LOWPASS FILTER: ');
+
+% LowPass
+if(Answer==1)
+[Y,FS]=audioread('audiocheck.net_pinknoise.wav'); %Read music input
+% FS is the sampling rate for the audio by 'audioread'
+% Fs is the best sampling rate if you want to hear the sound accuratley
+
+    
+fc=input('Enter the cut off frequency: ');
+f_stopband=input('Enter the stopband edge frequency: ');
+f_passband=input('Enter the passband edge frequency: ');
+disp('You should know that "to hear well" use sampling rate of 44100 hz');
+fs=input('Enter the sampling rate: ');
+window=input('Enter which window you want 1- recatngular 2- hamming 3- blackman  (type in the number): ');
+ts=1/fs;
+delta_f = (abs(f_stopband-f_passband))/fs;    %transition band width
+if(window==1) 
+    
+
+x=1; % to identify the window for later use 
+N_intial=0.9/delta_f; % for rectangular window
+N=round(N_intial);
+% to get N the right way by rounding it to the higher value if it was a
+% fraction
+    if N>N_intial
+    if rem(N,2)==0
+        N=N+1;
+    end
+    end
+    if N<N_intial
+    if rem(N,2)==0
+        N=N+1;
+    else
+        N=N+2;
+    end
+    end
+    if N==N_intial
+    if rem(N,2)==0
+        N=N+1;
+    end  
+    end
+ 
+omega_c=2*pi*fc*ts; % normalized cutoff frequency
+M=(N-1)/2;
+n=-M:1:-1;
+h=(sin(omega_c*n)./(n*pi));
+h_0=omega_c/pi;
+h=[h h_0]; % concatenation
+h(M+2:N)=h(M:-1:1);
+
+w=rectwin(N).';
+
+b=h.*w;
+[H,W]=freqz(b,1,1024); % W set of noramlized frequencies , H is the complex values
+figure
+plot((W*fs)/(2*pi),abs(H));
+title('RECTANGULAR');
+Y_filtered=filter(b,1,Y); % audio output signal
+sound(Y_filtered,fs);     % audio output
+end
+if(window==2)
+%% 2-Hamming window
+
+
+
+x=2;
+N_intial=3.3/delta_f; % for hamming window
+N=round(N_intial);
+% to get N the right way  by rounding it 
+    if N>N_intial
+    if rem(N,2)==0
+        N=N+1;
+    end
+    end
+    if N<N_intial
+    if rem(N,2)==0
+        N=N+1;
+    else
+        N=N+2;
+    end
+    end
+    if N==N_intial
+    if rem(N,2)==0
+        N=N+1;
+    end  
+    end
+omega_c=2*pi*fc*ts; %normalized cutoff frequency
+M=(N-1)/2;
+n=-M:1:-1;
+h=(sin(omega_c*n)./(n*pi));
+h_0=omega_c/pi;
+h=[h h_0];
+h(M+2:N)=h(M:-1:1);
+
+w=hamming(N).';
+
+b=h.*w;
+[H,W]=freqz(b,1,1024);
+figure
+plot((W*fs)/(2*pi),abs(H));
+title('HAMMING');
+Y_filtered=filter(b,1,Y); %output audio signal
+sound(Y_filtered,fs);     %output audio
+end
+if(window==3)
+%% 3- BlackMan Window
+
+
+
+x=3;
+N_intial=5.5/delta_f; % for blackman window
+N=round(N_intial);
+% to get N the right way 
+    if N>N_intial
+    if rem(N,2)==0
+        N=N+1;
+    end
+    end
+    if N<N_intial
+    if rem(N,2)==0
+        N=N+1;
+    else
+        N=N+2;
+    end
+    end
+    if N==N_intial
+    if rem(N,2)==0
+        N=N+1;
+    end  
+    end
+omega_c=2*pi*fc*ts;
+M=(N-1)/2;
+n=-M:1:-1;
+h=(sin(omega_c*n)./(n*pi));
+h_0=omega_c/pi;
+h=[h h_0];
+h(M+2:N)=h(M:-1:1);
+
+w=blackman(N).';
+
+
+b=h.*w;
+[H,W]=freqz(b,1,1024);
+figure
+plot((W*fs)/(2*pi),abs(H));
+title('BLACKMAN');
+Y_filtered=filter(b,1,Y); %audio signal
+sound(Y_filtered,fs);      % audio output
+end
+    if(window ~= 1&& window ~=2 && window ~=3)
+    x=input('PLs type in a number from 1 to 3 REPLACE_WITH_DASH_DASH-> RUN the Prograrm Again ');
+    end
+end
+if(Answer==2)
+    %% Design of a lowpass IIR filter using butterworth representation
+[Y,FS]=audioread('audiocheck.net_pinknoise.wav'); %Read music input
+
+% FS is the same as above 44100 hz is the best sampling rate 
+
+fc=input('Enter the cutoff frequency: ');
+disp('You should know that "to hear well" use sampling rate of 44100 hz');
+fs=input('Enter the sampling rate: ');
+if(fs==fc*2) % if the user entered a sampling rate double the fc REPLACE_WITH_DASH_DASH> butter function wouldnot give an error
+    fs=fs+1;
+end
+% if the user choses to pick one of the windows we have already determined
+% their attenuation specs
+n=10; % default value for n if the user didnot choose on of the following choices
+choice=5;
+choice1=input('CHOOSE\n1-Enter the order of the filter\n2-Enter the specs of the filter : ');
+if(choice1==2)
+choice=input('1-Rectangular window\n2-Hamming window\n3-Blackman\n4-Enter my specs\n');
+% Amax is the maximum allowable attenaution in the passband
+% Amin is the minimum allowable attenaution in the passband  
+if(choice==1)
+    Amax=0.7;
+    Amin=21;
+end
+if(choice==2)
+    Amax=0.0194;
+    Amin=53;
+end
+if(choice==3)
+    disp('Since you chose blackman you MUST increase the range of the transition region... at least 2000 hz ');
+    Amax=0.0017; %0.0017
+    Amin=74;
+end
+if(choice==4)
+    Amax=input('Enter the (Max. allowable attenuation in passband: ');
+    Amin=input('Enter the (MIN. allowable attenuation in Stopband: ');
+end
+disp('When entering the passband and stopband edge frequencies')
+disp('-MAKE SURE TO SET A REASONABLE VALUE');
+disp('-Narrowing the transition band would increase the order');
+ws=input('Enter the stopband edge frequency: ');
+wp=input('Enter the Passband edge frequency: ');
+n_intial=(0.5*log(((10.^(0.1*Amin))-1)/((10.^(0.1*Amax))-1)))/log(ws/wp); % this function is the butterworth normalization method to get the order of the filter 
+% to round n to the larger the value
+n=round(n_intial);
+% to get N the right way 
+    if n>n_intial
+    if rem(n,2)==0
+        n=n+1;
+    end
+    end
+    if n<n_intial
+    if rem(n,2)==0
+        n=n+1;
+    else
+        n=n+2;
+    end
+    end
+    if n==n_intial
+    if rem(n,2)==0
+        n=n+1;
+    end  
+    end
+
+end
+if(choice1==1)
+    n=input('Order : ');
+end
+
+% we will choose fs/2 in the following function to satisify the nyquist
+% rate (that's what I have found on mathsworks site)
+
+[b,a]=butter(n,fc/(fs/2));  % maximally flat 
+Y_filtered=filter(b,a,Y);   % audio signal
+sound(Y_filtered,fs);       % audio output
+[H,W]=freqz(b,a,1024);
+figure
+plot((W*fs)/(2*pi),abs(H));
+if(choice==1)
+    %wind=rectwin(signal_length).';
+    title('Rectangular');
+end
+if(choice==2)
+    %wind=hamming(signal_length).';
+    title('Hamming');
+end
+if(choice==3)
+    %wind=blackman(signal_length).';
+    title('Blackman');
+end
+end
+
+% signal_window=signal.*wind;
+% figure
+% subplot(211);plot(signal);
+% title('INPUT SIGNAL');
+% subplot(212);plot(signal_window);
+% title('INPUT SIGNAL WITH WINDOW');
+figure
+subplot(211);
+plot(Y);
+title('INPUT SIGNAL');
+subplot(212);
+plot(Y_filtered);
+title('output SIGNAL');
+
+%% The following is to plot the DFT of the frequnecies before and after to track the effiency of the filter
+N_2=length(Y);
+N_2_f=length(Y_filtered);
+f_axis=-fs/2:fs/N_2:fs/2-(fs/N_2);
+figure
+Y_fft =fftshift(fft(Y));
+Y_fft=transpose(Y_fft); % plot function can take either a row or colomn matrix we chose the row matrix form to be the same as f_axis
+subplot(211);stem(f_axis,(1/N_2)*abs((Y_fft))) % plotting amplitude
+title('Before Filtering');
+Y_fft_filtered =fftshift(fft(Y_filtered));
+Y_fft_filtered=transpose(Y_fft_filtered); % plot function can take either a row or colomn matrix we chose the row matrix form to be the same as f_axis
+subplot(212);stem(f_axis,(1/N_2_f)*abs(Y_fft_filtered)); % plotting amplitude
+title('After Filtering');
+figure
+stem(f_axis,abs((Y_fft)));
+hold
+stem(f_axis,abs(Y_fft_filtered));
+if(Answer==1)
+    title('FIR');
+end
+if(Answer==2)
+    title('IIR');
+end
+
+
+% the filter is plotted in it's magnitude form not the decibel form 
+% if we want decibel we would just use  20log(abs(H)) instead of abs(H)
+
+
+%%                                THANKS
+
+
+
+##### SOURCE END #####
+--></body></html>
